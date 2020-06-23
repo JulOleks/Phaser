@@ -1,32 +1,45 @@
 import Phaser from "phaser";
-import logoImg from "./assets/logo.png";
+import {GameScene} from './game/scenes/GameScene';
 
 const config = {
-  type: Phaser.AUTO,
-  parent: "phaser-example",
-  width: 800,
-  height: 600,
-  scene: {
-    preload: preload,
-    create: create
-  }
-};
+  type: Phaser.CANVAS,
+	backgroundColor: "b9eaff",
+	width: 960,
+	height: 960,
+  plugins: {},
+//   scale: {
+//   mode: Phaser.Scale.FIT,
+//   autoCenter: Phaser.Scale.CENTER_BOTH
+//  },
+	physics: {
+		default: 'matter',
+		matter: {
+			gravity: { y: 0.2 },
+		},
+	},
 
-const game = new Phaser.Game(config);
-
-function preload() {
-  this.load.image("logo", logoImg);
+	scene: [GameScene]
 }
 
-function create() {
-  const logo = this.add.image(400, 150, "logo");
 
-  this.tweens.add({
-    targets: logo,
-    y: 450,
-    duration: 2000,
-    ease: "Power2",
-    yoyo: true,
-    loop: -1
-  });
-}
+window.addEventListener('load', ()=>{
+	const game = new Phaser.Game(config);
+
+
+	const resize = () => {
+		const width = window.innerWidth;
+		const height = window.innerHeight;
+		
+		game.scale.resize(width, height);
+		
+		game.canvas.style.width = '100%';
+		game.canvas.style.height = '100%';
+	}
+
+	window.addEventListener('resize', () => {
+    console.log('resize event')
+    resize()
+  })
+  console.log('resize at start')
+  resize()
+})
