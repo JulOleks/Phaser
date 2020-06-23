@@ -10,10 +10,10 @@ export class Gui extends Phaser.GameObjects.Container {
 
 		this.centerX = scene.cameras.main.width / 2;
 
-		const scaleX = scene.cameras.main.width / bg.width;
-		const scaleY = scene.cameras.main.height / bg.height;
-		let scale = Math.max(scaleX, scaleY);
-		bg.setScale(scale).setScrollFactor(0);
+		// const scaleX = scene.cameras.main.width / bg.width;
+		// const scaleY = scene.cameras.main.height / bg.height;
+		// let scale = Math.max(scaleX, scaleY);
+		// bg.setScale(scale).setScrollFactor(0);
 
 		this.slots = {
 			empty: []
@@ -45,14 +45,12 @@ export class Gui extends Phaser.GameObjects.Container {
 		}
 	}
 
-	createBubbles(){
-
-	  let randomX = Phaser.Math.Between(0, this.scene.cameras.main.width);	
-		console.log(randomX);
-		
+	createBubbles(){	
 		let delay = 0;
-
+		
 		for(let i = 0; i < 30; i++ ){
+			let randomX = Phaser.Math.Between(0, this.scene.cameras.main.width);	
+			
 			this.bubble = this.scene.add.image(this.width + randomX, 1000, 'puzir');
 
 			this.bubble.setScale(Phaser.Math.Between(0.1, 0.6));
